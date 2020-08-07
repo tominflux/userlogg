@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/tominflux/userlogg#readme",
   "dependencies": {
+    "@x-logg/mongoops": "^0.1.2",
     "aarketype": "^0.1.5"
   }
 }
