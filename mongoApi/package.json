@@ -1,0 +1,25 @@
+{
+  "name": "@x-logg/userlogg-mongo",
+  "version": "0.1.0",
+  "description": "",
+  "main": "lib/api/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tominflux/userlogg.git"
+  },
+  "author": "Tom Chesters",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/tominflux/userlogg/issues"
+  },
+  "homepage": "https://github.com/tominflux/userlogg#readme",
+  "dependencies": {
+    "@x-logg/util": "^0.1.0"
+  }
+}
