@@ -52,8 +52,12 @@ const deleteUser = async (req, res, next) => {
 /////////////
 
 
-exports.postUser = postUser
-exports.getUsers = getUsers
-exports.getUser = getUser
-exports.putUser = putUser
-exports.deleteUser = deleteUser
+const serveUserApi = (router) => {
+    router.post("/userlog/user/:uid", postUser)
+    router.get("/userlog/users", getUsers)
+    router.get("/userlog/user/:uid", getUser)
+    router.put("/userlog/user/:uid", putUser)
+    router.delete("/userlog/user/:uid", deleteUser)
+}
+
+exports.serveUserApi = serveUserApi

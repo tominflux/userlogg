@@ -19,5 +19,9 @@ const putArchetype = async (req, res, next) => {
 ///////////
 
 
-exports.getArchetype = getArchetype
-exports.putArchetype = putArchetype
+const serveArchetypeApi = (router) => {
+    router.get("/userlog/archetype", getArchetype)
+    router.put("/userlog/archetype", putArchetype)
+}
+
+exports.serveArchetypeApi = serveArchetypeApi

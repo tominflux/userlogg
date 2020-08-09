@@ -24,7 +24,7 @@ const getAdmin = async (req, res, next) => {
     res.json(admin)
 }
 
-const updateAdmin = async (req, res, next) => {
+const putAdmin = async (req, res, next) => {
     const username = req.params.uid
     const newPassword = req.body.newPassword
     //
@@ -46,8 +46,12 @@ const deleteAdmin = async (req, res, next) => {
 /////////////
 
 
-exports.postAdmin = postAdmin
-exports.getAdmins = getAdmins
-exports.getAdmin = getAdmin
-exports.updateAdmin = updateAdmin
-exports.deleteAdmin = deleteAdmin
+const serveAdminApi = (router) => {
+    router.post("/userlog/admin/:uid", postAdmin)
+    router.get("/userlog/admins", getAdmins)
+    router.get("/userlog/admin/:uid", getAdmin)
+    router.put("/userlog/admin/:uid", putAdmin)
+    router.delete("/userlog/admin/:uid", deleteAdmin)
+}
+
+exports.serveAdminApi = serveAdminApi

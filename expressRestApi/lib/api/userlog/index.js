@@ -23,6 +23,10 @@ const deleteUserlog = async (req, res, next) => {
 //////////
 
 
-exports.postUserlog = postUserlog
-exports.getUserlog = getUserlog
-exports.deleteUserlog = deleteUserlog
+const serveUserlogApi = (router) => {
+    router.post("/userlog", postUserlog)
+    router.get("/userlog", getUserlog)
+    router.delete("/userlog", deleteUserlog)
+}
+
+exports.serveUserlogApi = serveUserlogApi
