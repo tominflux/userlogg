@@ -21,5 +21,6 @@
   "homepage": "https://github.com/tominflux/userlogg#readme",
   "dependencies": {
     "@x-logg/util": "^0.1.0"
-  }
+  },
+  "devDependencies": {}
 }
