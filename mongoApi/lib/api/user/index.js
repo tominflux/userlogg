@@ -77,7 +77,7 @@ const readUser = async (
     //
     const user = (
         users.length > 0
-    ) ? user : null
+    ) ? users[0] : null
     //
     return user
 }
@@ -85,7 +85,7 @@ const readUser = async (
 const updateUser = async (
     options, 
     identifier,
-    newProperties
+    properties=null
 ) => {
     //
     const { connection, database } = await connect(options)
@@ -94,9 +94,7 @@ const updateUser = async (
     //
     const query = { identifier }
     //
-    const values = {
-        properties: newProperties
-    }
+    const values = { properties } 
     //
     await updateInCollection(
         database,
@@ -109,6 +107,7 @@ const updateUser = async (
 }
 
 const deleteUser = async (
+    options,
     identifier
 ) => {
     //

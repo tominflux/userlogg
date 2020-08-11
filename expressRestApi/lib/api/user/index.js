@@ -5,7 +5,7 @@ const postUser = async (req, res, next) => {
     const password = req.body.password
     const properties = req.body.properties
     //
-    await req.createUser(
+    await req.userlogg.createUser(
         username,
         password,
         properties
@@ -32,9 +32,10 @@ const getUser = async (req, res, next) => {
 
 const putUser = async (req, res, next) => {
     const username = req.params.uid
+    const newPassword = req.body.newPassword
     const newProperties = req.body.newProperties
     //
-    await req.userlogg.updateUser(username, newProperties)
+    await req.userlogg.updateUser(username, newPassword, newProperties)
     //
     res.send()
 }
@@ -44,7 +45,7 @@ const deleteUser = async (req, res, next) => {
     //
     await req.userlogg.deleteUser(username)
     //
-    res.send
+    res.send()
 }
 
 
