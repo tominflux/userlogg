@@ -1,9 +1,28 @@
 const {
     connect,
+    insertIntoCollection,
     findInCollection,
     updateInCollection
 } = require("@x-logg/mongoops")
 const { getArchetypeCollectionName } = require("../../util/misc")
+
+const createArchetype = async (
+    options,
+    lockedArchetype
+) => {
+    //
+    const { connection, database } = await connect(options)
+    //
+    const archColName = getArchetypeCollectionName()
+    //
+    await insertIntoCollection(
+        database,
+        archColName,
+        [ lockedArchetype ]
+    )
+    //
+    connection.close()
+}
 
 const readArchetype = async (
     options
@@ -25,7 +44,7 @@ const readArchetype = async (
     //
     const archetype = (
         archetypes.length > 0
-    ) ? archetype : null
+    ) ? archetypes[0] : null
     //
     return archetype
 }
@@ -55,5 +74,6 @@ const updateArchetype = async (
     connection.close()
 }
 
+exports.createArchetype = createArchetype
 exports.readArchetype = readArchetype
 exports.updateArchetype = updateArchetype

@@ -33,9 +33,12 @@
   "homepage": "https://github.com/tominflux/userlogg#readme",
   "dependencies": {
     "@x-logg/mongoops": "^0.1.2",
-    "aarketype": "^0.1.5"
+    "@x-logg/util": "^0.1.0",
+    "aarketype": "^0.1.6",
+    "ffield": "^0.2.5"
   },
   "devDependencies": {
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
   }
 }

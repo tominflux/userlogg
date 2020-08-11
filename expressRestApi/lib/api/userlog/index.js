@@ -1,7 +1,7 @@
 
 
 const postUserlog = async (req, res, next) => {
-    await req.userlogg.createUserLog()
+    await req.userlogg.createUserlog()
     //
     res.send()
 }

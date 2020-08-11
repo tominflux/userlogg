@@ -59,7 +59,7 @@ const readAdmin = async (
     //
     const query = { identifier }
     //
-    const lockedAndHashedAdmins = await findInCollection(
+    const lockedAdmins = await findInCollection(
         database,
         adminColName,
         query
@@ -68,8 +68,8 @@ const readAdmin = async (
     connection.close()
     //
     const admin = (
-        lockedAndHashedAdmins.length > 0
-    ) ? admin : null
+        lockedAdmins.length > 0
+    ) ? lockedAdmins[0] : null
     //
     return admin
 }
@@ -101,6 +101,7 @@ const updateAdmin = async (
 }
 
 const deleteAdmin = async (
+    options,
     identifier
 ) => {
     //
