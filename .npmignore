@@ -1,4 +1,6 @@
 app/
+expressRestApi/
+mongoApi/
 
 # Logs
 logs
