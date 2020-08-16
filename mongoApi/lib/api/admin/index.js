@@ -76,18 +76,17 @@ const readAdmin = async (
 
 const updateAdmin = async (
     options, 
-    identifier,
-    hashedPass
+    lockedAdmin
 ) => {
     //
     const { connection, database } = await connect(options)
     //
     const adminColName = getAdminCollectionName()
     //
-    const query = { identifier }
-    //
+    const query = { identifier: lockedAdmin.identifier }
+    //Build object of updated properties.
     const values = {
-        properties: { hashedPass }
+        properties: lockedAdmin.properties
     }
     //
     await updateInCollection(
