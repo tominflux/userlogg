@@ -5,9 +5,9 @@ const jwt = require('jsonwebtoken')
 /////////////
 
 
-const genAbstractAuthToken = (abstractItem, jwtKey) => {
+const genAbstractAuthToken = async (abstractItem, jwtKey) => {
     //Generate token.
-    const token = jwt.sign(
+    const token = await jwt.sign(
         { identifier: abstractItem.identifier.data },
         //process.env.JWT_KEY
         jwtKey
@@ -25,9 +25,9 @@ const genAdminAuthToken = async (username, jwtKey, userloggApi) => {
     //Read admin item.
     const admin = await userloggApi.readAdmin(username)
     //Generate token
-    const token = genAbstractAuthToken(admin, jwtKey)
+    const token = await genAbstractAuthToken(admin, jwtKey)
     //Update admin in userlogg.
-    userloggApi.updateAdmin(
+    await userloggApi.updateAdmin(
         username,
         null,
         token
@@ -40,9 +40,9 @@ const genUserAuthToken = async (username, jwtKey, userloggApi) => {
     //Read user item.
     const user = await userloggApi.readAdmin(username)
     //Generate token.
-    const token = genAbstractAuthToken(user, jwtKey)
+    const token = await genAbstractAuthToken(user, jwtKey)
     //Update user in userlogg.
-    userloggApi.updateUser(
+    await userloggApi.updateUser(
         username,
         null,
         token,

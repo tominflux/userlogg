@@ -13,6 +13,7 @@ const postLogin = async (req, res, next) => {
         const password = req.body.password
         //Read the user with specified username.
         const hashedUser = await req.userlogg.readUser(username)
+        const hashedPass = hashedUser.properties.hashedPass.data
         //Functions for checking credentials.
         const getUserExists = () => (
             typeof hashedUser !== "undefined" && 
@@ -20,7 +21,8 @@ const postLogin = async (req, res, next) => {
         )
         const getPasswordCorrect = async () => (
             await checkPassword(
-                password, hashedUser.hashedPass
+                password,
+                hashedPass
             )   
         )
         //Check credentials.

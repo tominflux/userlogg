@@ -10,10 +10,10 @@ const authUser = async (req, res, next) => {
     const token = (
         req
         .header("Authorization")
-        .replace("Bearer", "")
+        .replace("Bearer ", "")
     )
     //Verify token.
-    const data = jwt.verify(
+    const data = await jwt.verify(
         token,
         req.jwtKey
     )
@@ -25,8 +25,8 @@ const authUser = async (req, res, next) => {
         const user = await req.userlogg.readUser(username)
         //Function to ensure request token exists for user.
         const checkTokenMatch = () => {
-            for (const serverToken of user.properties.tokens) {
-                if (token === serverToken.data) {
+            for (const serverToken of user.properties.tokens.data) {
+                if (token === serverToken) {
                     return true
                 }
             }

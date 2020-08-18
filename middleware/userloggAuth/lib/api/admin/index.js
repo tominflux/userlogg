@@ -13,6 +13,7 @@ const postLogin = async (req, res, next) => {
         const password = req.body.password
         //Read the admin with specified username.
         const hashedAdmin = await req.userlogg.readAdmin(username)
+        const hashedPass = hashedAdmin.properties.hashedPass.data
         //Functions for checking credentials.
         const getAdminExists = () => (
             typeof hashedAdmin !== "undefined" && 
@@ -20,7 +21,8 @@ const postLogin = async (req, res, next) => {
         )
         const getPasswordCorrect = async () => (
             await checkPassword(
-                password, hashedAdmin.hashedPass
+                password, 
+                hashedPass
             )
         )
         //Check credentials.
@@ -29,7 +31,7 @@ const postLogin = async (req, res, next) => {
             !(await getPasswordCorrect())
         ) {
             //If either are incorrect, send 401 response.
-            res.status(401).send({
+            return res.status(401).send({
                 error: (
                     `Login failed.`
                 )
@@ -49,8 +51,10 @@ const postLogin = async (req, res, next) => {
             })
         }
     } catch (err) {
-        console.error(err)
-        res.status(400).send(err)
+        console.error(err.message)
+        res.status(400).send({
+            error: err.message
+        })
     }
 }
 
