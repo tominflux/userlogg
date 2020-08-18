@@ -6,19 +6,21 @@ const jwt = require("jsonwebtoken")
 
 
 const authUser = async (req, res, next) => {
-    //Get token from request.
-    const token = (
-        req
-        .header("Authorization")
-        .replace("Bearer ", "")
-    )
-    //Verify token.
-    const data = await jwt.verify(
-        token,
-        req.jwtKey
-    )
-    //
     try {
+        //Check Auth header supplied.
+        const authHeader = req.header("Authorization")
+        if (!authHeader) {
+            throw new Error(
+                `No token supplied.`
+            )
+        }
+        //Get token from request.
+        const token = authHeader.replace("Bearer ", "")
+        //Verify token.
+        const data = await jwt.verify(
+            token,
+            req.jwtKey
+        )
         //Extract username from token verification
         const username = data.identifier
         //Lookup user.

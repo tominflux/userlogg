@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken")
 
 const authAdmin = async (req, res, next) => {
     try {
+        //Check Auth header supplied.
         const authHeader = req.header("Authorization")
         if (!authHeader) {
             throw new Error(
