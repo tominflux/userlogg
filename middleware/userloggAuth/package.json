@@ -1,6 +1,6 @@
 {
   "name": "@x-logg/userlogg-auth",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Auth middleware that utilises userlogg.",
   "main": "lib/index.js",
   "directories": {
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/tominflux/userlogg/issues"
   },
-  "homepage": "https://github.com/tominflux/userlogg#readme"
+  "homepage": "https://github.com/tominflux/userlogg#readme",
+  "dependencies": {
+    "@x-logg/util": "^0.1.4"
+  }
 }

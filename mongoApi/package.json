@@ -1,6 +1,6 @@
 {
   "name": "@x-logg/userlogg-mongo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "lib/api/index.js",
   "directories": {
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/tominflux/userlogg#readme",
   "dependencies": {
+    "@x-logg/mongoops": "^0.1.2",
     "@x-logg/util": "^0.1.0"
   },
   "devDependencies": {}

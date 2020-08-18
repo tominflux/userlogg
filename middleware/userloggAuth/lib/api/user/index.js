@@ -18,7 +18,7 @@ const postLogin = async (req, res, next) => {
             typeof hashedUser !== "undefined" && 
             hashedUser !== null
         )
-        const getPasswordCorrect = () => (
+        const getPasswordCorrect = async () => (
             await checkPassword(
                 password, hashedUser.hashedPass
             )   

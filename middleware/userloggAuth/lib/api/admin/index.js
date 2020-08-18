@@ -18,7 +18,7 @@ const postLogin = async (req, res, next) => {
             typeof hashedAdmin !== "undefined" && 
             hashedAdmin !== null
         )
-        const getPasswordCorrect = () => (
+        const getPasswordCorrect = async () => (
             await checkPassword(
                 password, hashedAdmin.hashedPass
             )
@@ -29,7 +29,7 @@ const postLogin = async (req, res, next) => {
             !(await getPasswordCorrect())
         ) {
             //If either are incorrect, send 401 response.
-            return res.status(401).send({
+            res.status(401).send({
                 error: (
                     `Login failed.`
                 )
@@ -49,6 +49,7 @@ const postLogin = async (req, res, next) => {
             })
         }
     } catch (err) {
+        console.error(err)
         res.status(400).send(err)
     }
 }
