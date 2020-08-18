@@ -84,17 +84,16 @@ const readUser = async (
 
 const updateUser = async (
     options, 
-    identifier,
-    properties=null
+    lockedUser
 ) => {
     //
     const { connection, database } = await connect(options)
     //
     const userColName = getUserCollectionName()
     //
-    const query = { identifier }
+    const query = { identifier: lockedUser.identifier }
     //
-    const values = { properties } 
+    const values = { properties: lockedUser.properties } 
     //
     await updateInCollection(
         database,
