@@ -1,6 +1,7 @@
 app/
 expressRestApi/
 mongoApi/
+middleware/
 
 # Logs
 logs
