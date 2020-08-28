@@ -1,5 +1,5 @@
 const { checkPassword } = require("@x-logg/util")
-const { genUserAuthToken } = require("../../util/token")
+const { genUserAuthToken, checkUserToken } = require("../../util/token")
 
 
 //////////////
@@ -53,6 +53,51 @@ const postLogin = async (req, res, next) => {
     }
 }
 
+const postLogout = async (req, res, next) => {
+    const { user, token } = await checkUserToken(req)
+    try {
+        //Lock user for easy reading.
+        const lockedUser = lockItem(user)
+        //Get existing tokens and remove request token.
+        const existingTokens = lockedUser.properties.tokens
+        const updatedTokens = existingTokens.filter(
+            existingToken => (existingToken !== token)
+        )
+        //Update User tokens on DB
+        await req.userlogg.updateUser(
+            lockedUser.identifier,
+            null,
+            updatedTokens,
+            null
+        )
+        //Send OK response
+        res.send()
+    } catch (err) {
+        res.status(500).send(err)
+    }
+}
+
+const postLogoutEverywhere = async (req, res, next) => {
+    const { user, token } = await checkUserToken(req)
+    try {
+        //Lock user for easy reading.
+        const lockedUser = lockItem(user)
+        //Create empty tokens array
+        const updatedTokens = []
+        //Update user tokens on DB
+        await req.userlogg.updateUser(
+            lockedUser.identifier,
+            null,
+            updatedTokens,
+            null
+        )
+        //Send OK response
+        res.send()
+    } catch (err) {
+        res.status(500).send(err)
+    }
+}
+
 
 //////////////
 //////////////
@@ -60,6 +105,8 @@ const postLogin = async (req, res, next) => {
 
 const serveUserApi = async (router) => {
     router.post("/user/login/:uid", postLogin)
+    router.post("/user/logout", postLogout)
+    router.post("/user/logout-everywhere", postLogoutEverywhere)
 }
 
 

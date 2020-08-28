@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken")
+const { checkUserToken } = require("../../util/token")
 
 
 /////////////////
@@ -7,48 +7,7 @@ const jwt = require("jsonwebtoken")
 
 const authUser = async (req, res, next) => {
     try {
-        //Check Auth header supplied.
-        const authHeader = req.header("Authorization")
-        if (!authHeader) {
-            throw new Error(
-                `No token supplied.`
-            )
-        }
-        //Get token from request.
-        const token = authHeader.replace("Bearer ", "")
-        //Verify token.
-        const data = await jwt.verify(
-            token,
-            req.jwtKey
-        )
-        //Extract username from token verification
-        const username = data.identifier
-        //Lookup user.
-        const user = await req.userlogg.readUser(username)
-        //Function to ensure request token exists for user.
-        const checkTokenMatch = () => {
-            for (const serverToken of user.properties.tokens.data) {
-                if (token === serverToken) {
-                    return true
-                }
-            }
-            return false
-        }
-        //Whether or not user lookup returned a user.
-        const userExists = (user !== null)
-        if (!userExists) {
-            //If not, throw error.
-            throw new Error(
-                `User "${username}" does not exist.`
-            )
-        }
-        //Ensure user has request token.
-        if (!checkTokenMatch()) {
-            //If not, throw error.
-            throw new Error(
-                `User "${username}" is not logged in."`
-            )
-        }
+        const { user, token } = await checkUserToken(req)
         //Store user and token in request.
         //(Signifies that user is successfully logged in.)
         req.user = user

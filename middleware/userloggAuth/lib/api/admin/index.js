@@ -1,5 +1,6 @@
-const { checkPassword } = require("@x-logg/util")
+const { checkPassword, lockItem } = require("@x-logg/util")
 const { genAdminAuthToken } = require("../../util/token")
+const { checkAdminToken } = require("../../util/token")
 
 
 //////////////
@@ -58,12 +59,57 @@ const postLogin = async (req, res, next) => {
     }
 }
 
+const postLogout = async (req, res, next) => {
+    const { admin, token } = await checkAdminToken(req)
+    try {
+        //Lock admin for easy reading.
+        const lockedAdmin = lockItem(admin)
+        //Get existing tokens and remove request token.
+        const existingTokens = lockedAdmin.properties.tokens
+        const updatedTokens = existingTokens.filter(
+            existingToken => (existingToken !== token)
+        )
+        //Update Admin tokens on DB
+        await req.userlogg.updateAdmin(
+            lockedAdmin.identifier,
+            null,
+            updatedTokens
+        )
+        //Send OK response
+        res.send()
+    } catch (err) {
+        res.status(500).send(err)
+    }
+}
+
+const postLogoutEverywhere = async (req, res, next) => {
+    const { admin, token } = await checkAdminToken(req)
+    try {
+        //Lock admin for easy reading.
+        const lockedAdmin = lockItem(admin)
+        //Create empty tokens array
+        const updatedTokens = []
+        //Update admin tokens on DB
+        await req.userlogg.updateAdmin(
+            lockedAdmin.identifier,
+            null,
+            updatedTokens
+        )
+        //Send OK response
+        res.send()
+    } catch (err) {
+        res.status(500).send(err)
+    }
+}
+
 //////////////
 //////////////
 
 
 const serveAdminApi = async (router) => {
     router.post("/admin/login/:aid", postLogin)
+    router.post("/admin/logout", postLogout)
+    router.post("/admin/logout-everywhere", postLogoutEverywhere)
 }
 
 
