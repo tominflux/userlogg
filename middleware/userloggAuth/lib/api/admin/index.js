@@ -60,8 +60,8 @@ const postLogin = async (req, res, next) => {
 }
 
 const postLogout = async (req, res, next) => {
-    const { admin, token } = await checkAdminToken(req)
     try {
+        const { admin, token } = await checkAdminToken(req)
         //Lock admin for easy reading.
         const lockedAdmin = lockItem(admin)
         //Get existing tokens and remove request token.
@@ -83,8 +83,8 @@ const postLogout = async (req, res, next) => {
 }
 
 const postLogoutEverywhere = async (req, res, next) => {
-    const { admin, token } = await checkAdminToken(req)
     try {
+        const { admin, token } = await checkAdminToken(req)
         //Lock admin for easy reading.
         const lockedAdmin = lockItem(admin)
         //Create empty tokens array
