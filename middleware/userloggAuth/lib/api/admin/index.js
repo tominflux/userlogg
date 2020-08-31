@@ -1,7 +1,7 @@
 const { checkPassword, lockItem } = require("@x-logg/util")
 const { genAdminAuthToken } = require("../../util/token")
 const { checkAdminToken } = require("../../util/token")
-
+const { cookieOptions } = require("../../util/cookie")
 
 //////////////
 //////////////
@@ -45,11 +45,14 @@ const postLogin = async (req, res, next) => {
                 req.jwtKey,
                 req.userlogg
             )
-            //And send in response.
-            res.send({
-                admin: hashedAdmin,
-                token
-            })
+            //And send in cookie.
+            res
+            .cookie(
+                req.signedCookieSecret,
+                token,
+                cookieOptions
+            )
+            .send()
         }
     } catch (err) {
         console.error(err.message)

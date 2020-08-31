@@ -1,6 +1,6 @@
 {
   "name": "@x-logg/userlogg-auth",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "Auth middleware that utilises userlogg.",
   "main": "lib/index.js",
   "directories": {
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/tominflux/userlogg#readme",
   "dependencies": {
-    "@x-logg/util": "^0.1.4"
+    "@x-logg/util": "^0.1.4",
+    "cookie-parser": "^1.4.5"
   }
 }

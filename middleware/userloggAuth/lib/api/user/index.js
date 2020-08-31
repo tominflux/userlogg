@@ -1,5 +1,6 @@
 const { checkPassword } = require("@x-logg/util")
 const { genUserAuthToken, checkUserToken } = require("../../util/token")
+const { cookieOptions } = require("../../util/cookie")
 
 
 //////////////
@@ -42,11 +43,14 @@ const postLogin = async (req, res, next) => {
                 req.jwtKey,
                 req.userlogg
             )
-            //And send in response.
-            res.send({
-                user: hashedUser,
-                token
-            })
+            //And send in cookie.
+            res
+            .cookie(
+                req.signedCookieSecret,
+                token,
+                cookieOptions
+            )
+            .send()
         }
     } catch (err) {
         res.status(400).send(err)

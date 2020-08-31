@@ -1,4 +1,8 @@
 const jwt = require('jsonwebtoken')
+const {
+    adminCookieName,
+    userCookieName
+} = require("../cookie")
 
 
 /////////////
@@ -23,10 +27,18 @@ const genAbstractAuthToken = async (abstractItem, jwtKey, shelfLife=7) => {
     return token
 }
 
-const checkAbstractToken = async (req, readEntity, entityName) => {
+const checkAbstractToken = async (
+    req, 
+    readEntity, 
+    entityName,
+    cookieName
+) => {
     //Get token from request.
+    /*
     const authHeader = req.header('Authorization')
     const token = authHeader.replace("Bearer ", "")
+    */
+    const token = req.signedCookies[cookieName]
     //Verify token.
     const data = await jwt.verify(
         token,
@@ -120,7 +132,8 @@ const checkAdminToken = async (req) => {
     const { entity, token } = await checkAbstractToken(
         req,
         req.userlogg.readAdmin,
-        "Admin"
+        "Admin",
+        adminCookieName
     )
     const admin = entity
     return { admin, token }
@@ -128,8 +141,10 @@ const checkAdminToken = async (req) => {
 
 const checkUserToken = async (req) => {
     const { entity, token } =  await checkAbstractToken(
+        req,
         req.userlogg.readUser,
-        "User"
+        "User",
+        userCookieName
     )
     const user = entity
     return { user, token }
