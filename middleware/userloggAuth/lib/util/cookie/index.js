@@ -1,4 +1,5 @@
 
+const SESSION_SHELF_LIFE = 1000 * 60 * 60 * 24 * 7
 
 const adminCookieName = "xaid"
 const userCookieName = "xuid"
@@ -6,7 +7,8 @@ const cookieOptions = {
     httpOnly: true,
     sameSite: true,
     signed: true,
-    secure: process.env.NODE_ENV ? true : false,
+    //secure: process.env.NODE_ENV ? true : false,
+    secure: true,
     maxAge: SESSION_SHELF_LIFE,
     path: "/"
 }
