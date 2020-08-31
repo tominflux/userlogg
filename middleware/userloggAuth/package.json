@@ -1,6 +1,6 @@
 {
   "name": "@x-logg/userlogg-auth",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Auth middleware that utilises userlogg.",
   "main": "lib/index.js",
   "directories": {
