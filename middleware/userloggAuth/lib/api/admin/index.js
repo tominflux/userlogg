@@ -7,6 +7,25 @@ const { cookieOptions, adminCookieName } = require("../../util/cookie")
 //////////////
 
 
+const getLogin = async (req, res, next) => {
+    try {
+        const { admin, token } = await checkAdminToken(req)
+        //Lock admin for easy reading.
+        const lockedAdmin = lockItem(admin)
+        //
+        res.json({
+            authenticated: true,
+            identifier: lockedAdmin.identifier
+        })
+    } catch (err) {
+        //
+        res.json({
+            authenticated: false,
+            identifier: null
+        })
+    }
+}
+
 const postLogin = async (req, res, next) => {
     try {
         //Extract username and password from request.
@@ -110,6 +129,7 @@ const postLogoutEverywhere = async (req, res, next) => {
 
 
 const serveAdminApi = async (router) => {
+    router.get("/admin/login", getLogin)
     router.post("/admin/login/:aid", postLogin)
     router.post("/admin/logout", postLogout)
     router.post("/admin/logout-everywhere", postLogoutEverywhere)

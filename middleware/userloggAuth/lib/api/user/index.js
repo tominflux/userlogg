@@ -7,6 +7,26 @@ const { cookieOptions, userCookieName } = require("../../util/cookie")
 //////////////
 
 
+const getLogin = async (req, res, next) => {
+    try {
+        const { user, token } = await checkUserToken(req)
+        //Lock admin for easy reading.
+        const lockedUser = lockItem(user)
+        //
+        res.json({
+            authenticated: true,
+            identifier: lockedUser.identifier
+        })
+    } catch (err) {
+        //
+        res.json({
+            authenticated: false,
+            identifier: null
+        })
+    }
+}
+
+
 const postLogin = async (req, res, next) => {
     try {
         //Extract username and password from request.
@@ -108,6 +128,7 @@ const postLogoutEverywhere = async (req, res, next) => {
 
 
 const serveUserApi = async (router) => {
+    router.get("/user/login", getLogin)
     router.post("/user/login/:uid", postLogin)
     router.post("/user/logout", postLogout)
     router.post("/user/logout-everywhere", postLogoutEverywhere)
