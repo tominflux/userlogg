@@ -15,7 +15,11 @@ const genUserloggAuthMiddleware = (
     signedCookieSecret
 ) => {
     //API for logging in/logging out.
-    const api = genUserloggAuthApi(userloggApi, jwtKey)
+    const api = genUserloggAuthApi(
+        userloggApi, 
+        jwtKey,
+        signedCookieSecret
+    )
     //Middleware for checking admin auth.
     const adminAuthMiddleware = express.Router()
     adminAuthMiddleware.use(
