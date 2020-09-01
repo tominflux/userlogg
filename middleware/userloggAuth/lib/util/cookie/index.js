@@ -5,9 +5,9 @@ const adminCookieName = "xaid"
 const userCookieName = "xuid"
 const cookieOptions = {
     httpOnly: true,
-    sameSite: true,
+    sameSite: false,
     signed: true,
-    secure: (process.env.NODE_ENV === "production") ? true : false,
+    secure: true,
     maxAge: SESSION_SHELF_LIFE,
     path: "/"
 }
