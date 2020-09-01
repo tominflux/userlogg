@@ -14,15 +14,11 @@ const getLogin = async (req, res, next) => {
         const lockedAdmin = lockItem(admin)
         //
         res.json({
-            authenticated: true,
             identifier: lockedAdmin.identifier
         })
     } catch (err) {
         //
-        res.json({
-            authenticated: false,
-            identifier: null
-        })
+        res.status(401).send()
     }
 }
 

@@ -14,15 +14,11 @@ const getLogin = async (req, res, next) => {
         const lockedUser = lockItem(user)
         //
         res.json({
-            authenticated: true,
             identifier: lockedUser.identifier
         })
     } catch (err) {
         //
-        res.json({
-            authenticated: false,
-            identifier: null
-        })
+        res.status(401).send()
     }
 }
 
