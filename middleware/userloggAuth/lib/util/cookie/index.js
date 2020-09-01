@@ -7,8 +7,7 @@ const cookieOptions = {
     httpOnly: true,
     sameSite: true,
     signed: true,
-    //secure: process.env.NODE_ENV ? true : false,
-    secure: true,
+    secure: (process.env.NODE_ENV === "production") ? true : false,
     maxAge: SESSION_SHELF_LIFE,
     path: "/"
 }

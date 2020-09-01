@@ -1,6 +1,6 @@
 const { checkPassword } = require("@x-logg/util")
 const { genUserAuthToken, checkUserToken } = require("../../util/token")
-const { cookieOptions } = require("../../util/cookie")
+const { cookieOptions, userCookieName } = require("../../util/cookie")
 
 
 //////////////
@@ -46,7 +46,7 @@ const postLogin = async (req, res, next) => {
             //And send in cookie.
             res
             .cookie(
-                req.signedCookieSecret,
+                userCookieName,
                 token,
                 cookieOptions
             )
