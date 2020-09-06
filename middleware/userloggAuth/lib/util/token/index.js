@@ -31,14 +31,12 @@ const checkAbstractToken = async (
     req, 
     readEntity, 
     entityName,
-    cookieName
+    //cookieName
 ) => {
     //Get token from request.
-    /*
     const authHeader = req.header('Authorization')
     const token = authHeader.replace("Bearer ", "")
-    */
-    const token = req.signedCookies[cookieName]
+    //const token = req.signedCookies[cookieName]
     //Verify token.
     const data = await jwt.verify(
         token,

@@ -5,7 +5,7 @@ const adminCookieName = "xaid"
 const userCookieName = "xuid"
 const cookieOptions = {
     httpOnly: true,
-    sameSite: false,
+    sameSite: true,
     signed: true,
     secure: true,
     maxAge: SESSION_SHELF_LIFE,
