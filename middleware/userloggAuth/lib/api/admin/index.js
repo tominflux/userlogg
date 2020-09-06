@@ -60,6 +60,7 @@ const postLogin = async (req, res, next) => {
                 req.jwtKey,
                 req.userlogg
             )
+            /*
             //And send in cookie.
             res
             .cookie(
@@ -68,6 +69,9 @@ const postLogin = async (req, res, next) => {
                 cookieOptions
             )
             .send()
+            */
+           //And send in JSON response.
+           res.json({ token })
         }
     } catch (err) {
         console.error(err.message)
