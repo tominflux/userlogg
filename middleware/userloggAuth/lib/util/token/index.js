@@ -36,6 +36,7 @@ const checkAbstractToken = async (
     //Get token from request.
     const authHeader = req.header('Authorization')
     const token = authHeader.replace("Bearer ", "")
+    console.log(token)
     //const token = req.signedCookies[cookieName]
     //Verify token.
     const data = await jwt.verify(
