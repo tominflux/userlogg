@@ -1,4 +1,4 @@
-const { countInCollection } = require("@x-logg/mongoops/lib/operations")
+const { countInCollection } = require("@x-logg/mongoops")
 const { getAdminCollectionName, getUserCollectionName } = require("../misc")
 
 
