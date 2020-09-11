@@ -2,6 +2,7 @@ const express = require("express")
 const bodyParser = require('body-parser');
 const { serveAdminApi } = require("./admin")
 const { serveArchetypeApi } = require("./archetype")
+const { serveStatsApi } = require("./stats")
 const { serveUserApi } = require("./user")
 const { serveUserlogApi } = require("./userlog")
 
@@ -17,6 +18,7 @@ const genUserloggExpressRestApi = (userloggApi) => {
     //
     serveAdminApi(router)
     serveArchetypeApi(router)
+    serveStatsApi(router)
     serveUserApi(router)
     serveUserlogApi(router)
     //
