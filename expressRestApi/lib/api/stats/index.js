@@ -46,8 +46,8 @@ const getStatsAdmin = async (req, res, next) => (
 
 
 const serveStatsApi = (router) => {
-    router.get("/stats/userlog/admin", getStatsAdmin)
-    router.get("/stats/userlog/user", getStatsUser)
+    router.get("/userlog/stats/admin", getStatsAdmin)
+    router.get("/userlog/stats/user", getStatsUser)
 }
 
 exports.serveStatsApi = serveStatsApi
