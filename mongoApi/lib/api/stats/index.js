@@ -1,3 +1,4 @@
+const { connect } = require("@x-logg/mongoops")
 const { getEntityStats, ENTITY_TYPE } = require("../../util/stats")
 
 
