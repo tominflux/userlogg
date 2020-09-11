@@ -1,6 +1,7 @@
 const { genMongoApi } = require("@x-logg/util")
 const adminMethods = require("./admin")
 const archetypeMethods = require("./archetype")
+const statsMethods = require("./stats")
 const userMethods = require("./user")
 const userlogMethods = require("./userlog")
 
@@ -9,6 +10,7 @@ const userlogMethods = require("./userlog")
 const allMethods = {
     ...adminMethods,
     ...archetypeMethods,
+    ...statsMethods,
     ...userMethods,
     ...userlogMethods
 }
