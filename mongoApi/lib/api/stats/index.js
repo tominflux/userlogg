@@ -1,25 +1,36 @@
-const {
-    countInCollection
-} = require("@x-logg/mongoops")
-const { getUserCollectionName } = require("../../util/misc")
+const { getEntityStats, ENTITY_TYPE } = require("../../util/stats")
 
-const readStatsUser = async (
-    options
+
+///////////
+///////////
+
+
+const readStatsEntity = async (
+    options,
+    entityType
 ) => {
-    //
     const { connection, database } = await connect(options)
-    //
-    const collectionName = getUserCollectionName()
-    //
-    const count = await countInCollection(database, collectionName)
-    //
+    const stats = await getEntityStats(database, entityType)
     connection.close()
-    //
-    const stats = {
-        count
-    }
-    //
     return stats
 }
 
+
+///////////
+///////////
+
+
+const readStatsAdmin = async (options) => (
+    await readStatsEntity(options, ENTITY_TYPE.ADMIN)
+)
+
+const readStatsUser = async (options) => (
+    await readStatsEntity(options, ENTITY_TYPE.USER)
+)
+
+///////////
+///////////
+
+
+exports.readStatsAdmin = readStatsAdmin
 exports.readStatsUser = readStatsUser

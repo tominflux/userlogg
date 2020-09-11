@@ -1,6 +1,6 @@
 {
   "name": "@x-logg/userlogg-express-rest",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "main": "lib/api/index.js",
   "directories": {
