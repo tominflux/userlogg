@@ -1,6 +1,6 @@
 {
   "name": "userlogg",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "description": "Back-end framework for modelling platform users. ",
   "main": "lib/api/index.js",
   "scripts": {
